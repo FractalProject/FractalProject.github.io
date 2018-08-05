@@ -1,8 +1,8 @@
 # Site settings
 title: Fractal
-description: Fractal is dedicated to providing machine learning guides and researching reinforcement learning.
-cover: assets/images/radhakrishna.jpg
-logo: assets/images/logo.png
+description: Simple guides for machine learning topics
+cover: assets/images/FractalLogo.png
+logo: assets/images/FractalLogo2.png
 favicon: assets/images/favicon.png
 baseurl: "/" # the subpath of your site, e.g. /blog/ or / for root
 url: "https://FractalProject.github.io" # the base hostname & protocol for your site
@@ -15,7 +15,7 @@ github:  github
 
 #Additional Pages
 about: about
-# research: research
+research: research
 contact: contact
 privacy-policy: privacy-policy
 

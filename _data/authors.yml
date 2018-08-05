@@ -14,3 +14,10 @@ krishna:
   url: shriradhakrishna.com
   bio: Radhe! Radhe!
   assets: assets/images/favicon.png
+Michael:
+  username: MICHAEL
+  location: Atlanta
+  url_full: https://mpiseno.github.io
+  url: mpiseno.github.io
+  bio: This is my bio
+  assets: assets/images/favicon.png
