@@ -3,21 +3,21 @@ title: Fractal
 description: Simple guides for machine learning topics
 cover: assets/images/FractalLogo.png
 logo: assets/images/FractalLogo2.png
-favicon: assets/images/favicon.png
+favicon: assets/images/FractalLogoFavicon.png
 baseurl: "/" # the subpath of your site, e.g. /blog/ or / for root
 url: "https://FractalProject.github.io" # the base hostname & protocol for your site
 paginate:	5 # The number of posts to show per page on your homepage
 
 # Social
-facebook: facebook
-twitter: twitter
-github:  github
+facebook: fractalproject
+#twitter: twitter
+github:  fractalproject
 
 #Additional Pages
 about: about
 research: research
 contact: contact
-privacy-policy: privacy-policy
+#privacy-policy: privacy-policy
 
 
 permalink: /:title

@@ -4,29 +4,46 @@ title: About
 permalink: /about/
 ---
 
-<amp-img width="600" height="300" layout="responsive" src="http://lorempixel.com/600/300/sports"></amp-img>
+<!--amp-img width="600" height="300" layout="responsive" src="http://lorempixel.com/600/300/sports"></amp-img-->
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac augue libero.
-Fusce ac tempor dolor. Ut est dui, gravida a consequat aliquet, fermentum
-sodales risus. Suspendisse eu arcu id mi ornare facilisis non id nisl. Maecenas
-nec congue arcu, non semper neque. Proin mollis nisl diam, eu ultrices diam
-facilisis et. Integer fringilla lorem quis semper venenatis.
+## What is Fractal?
 
-Aliquam vestibulum purus enim. Sed rhoncus interdum erat id consequat. Nulla
-cursus venenatis massa, quis convallis lacus condimentum vel. Etiam mollis,
-orci ac pharetra commodo, diam lectus hendrerit eros, ac elementum magna augue
-sed tellus. Maecenas molestie, nisi ut sodales scelerisque, purus neque
-imperdiet dui, mollis elementum sem augue vel ipsum. Nulla lacinia arcu at quam
-lobortis, vitae interdum tellus fermentum. Cum sociis natoque penatibus et
-magnis dis parturient montes, nascetur ridiculus mus. Fusce sodales semper erat,
-eu fringilla ligula vulputate id. Maecenas quis libero pellentesque lacus
-egestas vehicula sit amet et neque. Nulla nec facilisis sem. Pellentesque rutrum
-elementum molestie. Quisque eget dui ac quam placerat dictum. Suspendisse quis
-ante placerat, efficitur enim ut, commodo tortor. Etiam consequat, eros quis
-consequat congue, augue mauris molestie libero, sed iaculis lectus enim eu magna.
+Fractal is an organization dedicated to providing detailed and easy-to-understand
+guides for machine learning and computer science concepts. Say you're a student
+who is really interested in machine learning, which you've heard a lot of great
+things about, but you're not sure how to get started learning it because there
+are so many different components and you're not sure how everything fits together.
+You've heard of Tensorflow, you can code in Python, you know some calculus perhaps,
+and you've heard of neural networks, but you're just not sure how all these fit
+together.
 
-Etiam sapien dolor, mattis vel feugiat nec, egestas eget risus. Lorem ipsum
-dolor sit amet, consectetur adipiscing elit. Aenean aliquam massa a est porta
- vehicula. Cras eu gravida massa. Integer non sem ac mi ultrices posuere a
- pretium tortor. Mauris vitae varius sem. Praesent faucibus nec felis et dictum.
- Vestibulum lorem velit, laoreet nec vestibulum in, varius nec enim.
+Thats where Fractal comes in. We aim to create guides that clearly show how all
+these topics and technologies fit together to make machine learning possible, and
+then demonstrate their capabilities. We take you from downloading your first
+text editor all the way to creating convolutional neural networks and implementing
+reinforcement learning algorithms.
+
+In addition to our guides, we are also interested in researching researching
+applications of reinforcement learning (RL), and exploring new methods in RL.
+
+
+---
+
+## Our Team
+
+
+Michael: President, Founder
+
+Michael founded Fractal in 2017 at Stanford University while taking
+entrepreneurship classes at Stanford Summer Session. He wanted to encourage STEM 
+education by making it easier for people interested in machine learning and 
+computer science in general to get started in those fields. Later he began
+researching reinforcement learning and integrated his research into Fractal to
+showcase this growing subfield of machine learning.
+
+
+Preston: Researcher
+
+Preston joined Fractal in the summer of 2018.
+
+
