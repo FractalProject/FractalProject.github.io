@@ -23,8 +23,8 @@ then demonstrate their capabilities. We take you from downloading your first
 text editor all the way to creating convolutional neural networks and implementing
 reinforcement learning algorithms.
 
-In addition to our guides, we are also interested in researching researching
-applications of reinforcement learning (RL), and exploring new methods in RL.
+In addition to our guides, we are also interested in researching applications
+of reinforcement learning (RL), and exploring new methods in RL.
 
 
 ---
