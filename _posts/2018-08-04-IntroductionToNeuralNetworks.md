@@ -44,7 +44,7 @@ We could also perform an operation called an argmax on the output vector, to red
 
 ## Artificial Neural Networks
 
-### Structure
+#### Structure
 
 An arificial neural network, or ANN for short, is a network of interconnected nodes that together can model a mathematical function. The ANN is arranged in layers of nodes. Think of a node as just a container that holds a number. Each node will take inputs from every node in the previous layer (except the first layer), do some fancy math on its input, and then spit out a output to each node in the next layer. Here's an example of a node taking in an input from each node in the previous layer.
 
@@ -64,7 +64,7 @@ As for the hidden layers, choosing how many hidden layers we want and how many n
 
 <img class="center-img" src="{{ site.baseurl }}Images/network2.png">
 
-### Some Intuition
+#### Some Intuition
 
 "Why do we expect this layered structure of nodes to predict anything?", you might be thinking. I had the same thoughts when I was first learning this stuff. We can think of it like this. We want the final layer to tell us which digit it recognizes right? So it might be helpful to think about how we as humans determine what digit we are looking at. For example, we recognize a 9 because it has a loop on top and a line sticking out from the bottom. Similarly, we recognize a 7 as a horizontal line and then a vertical line sticking down on its right side. In other words, we break it down into smaller problems of recognition. So ideally, we want our network's second-to-last layer to be able to recognize and predict smaller components of a digit (e.g. loops or lines or multiple connected lines).
 
@@ -72,7 +72,7 @@ But isn't that just our original problem except scaled down a little bit? Exactl
 
 So you might think, we don't we just have a million-layer network and predict really complex images? We'll it turns out this is not only really computationally expensive, but there are other hurdles that are more fundamental to the structure of the network that are beyond the scope of this tutorial, but its important to note that neural networks aren't just magic structures that can predict anything - there are definitely limits.
 
-### The Activation Function
+#### The Activation Function
 
 Before we get into the specifics of the activation function, we should solidify exactly how data will flow into each node in a more mathematical sense. Lets just examine one node, - we'll call it $q$ - in the second layer of the network (the first hidden layer) and see how it works. As values from the input layer travel along their paths to get to $q$, they run into the weights. The value from each input gets multiplied by its respective weight, and then when they all get to $q$, those weighted valued get summed together. We will call this summed value $z$. In other words,
 
@@ -115,9 +115,9 @@ How we actually make these weights positive where we want them and negative in o
 
 So to summarize this section, each node in a hidden layer or output layer will take a weighted sum  of input values, put that sum into an activation function, and then spit out a value that tells all the nodes in the next layer how important that node is to whatever its trying to predict.
 
-### Bias
+#### Bias
 
-So we've got our nodes to activate based on how positive the weighted sum of their inputs are. But what if we only want our activation function to give strong activations if the weighted sum is higher than some predefined value? Maybe we, or our network, wants to make it difficult to get good activations for certain nodes, and easier for others. This is where the bias term comes in. The bias term shifts the weighted input $z$ down or up, making is more difficult or more easy to get higher outputs from the activation function. Mathematically the bias term for each node will be a $b$, and it comes into play when calculating our activation output. From how on we will use the letter $h$ to denote the activation function output.
+So we've got our nodes to activate based on how positive the weighted sum of their inputs are. But what if we only want our activation function to give strong activations if the weighted sum is higher than some predefined value? Maybe we, or our network, wants to make it difficult to get good activations for certain nodes, and easier for others. This is where the bias term comes in. The bias term shifts the weighted input $z$ down or up, making it more difficult or more easy to get higher outputs from the activation function. Mathematically the bias term for each node will be represented by a $b$, and it comes into play when calculating our activation output. From now on we will use the letter $h$ to denote the activation function output.
 
 $$h = sigmoid(z) = sigmoid(w_{1}x_{1} + w_{2}x_{2} + ... + w_{n}x_{n} + b) = sigmoid((\sum_{i=0}^{n} w_{i}x_{i}) + b)$$
 
@@ -125,5 +125,103 @@ If our bias is -10 for example, then our weighted sum has to equal 10 more than 
 
 <img class="center-img" src="{{ site.baseurl }}Images/bias.png" width="400" height="200">
 
-Note the +1 node on the bottom of each layer that will be multiplied by the bias term on each of its connections, then added to the weighted sum of each node in the next layer to produce the desired effect. By changing both the weights and the bias during training, we can adjust the "difficulty" of the activation of each node as well as the weights themselves.
+Its important to note that there may be a different bias value for EACH node in a particular layer. The calculation of $h$ above only calculates the output of one node, but each node in a layer will have its own calculation, so there isn't just one bias value. Later we will represent the bias as a vector that holds the biases for each node in a particulat layer. By changing both the weights and the bias during training, we can adjust the "difficulty" of the activation of each node as well as the weights themselves.
 
+Now, just to be completely clear, lets talk about how many weights and biases we have in our network. Our network have three layers. The first layer (input layer) has 784 nodes, the second layer (hidden layer) has 15 nodes, and the output layer has 10 nodes. Every node in the input layer is connected to every node in the hidden layer, a total of $784 \times 15 = 11760$ connections from the input layer to the hidden layer. Each one of these connections will have its own weight. Additionally, since each node in the hidden layer will require its own bias for calculating its $h$ value, we will need 15 bias values. By the same logic, the number of weights and biases needed for the hidden layer to the output layer is $15 \times 10 = 150$ and 10 respectively. All together our network has 11935 trainable parameters. 11935 dials we can tweak to model a function to predict handwritten digits! When we say a neural network "learns", we mean the process by which it adjusts those trainable parameters to get better at doing some task, which in this case is modelling handwritten digits.
+
+#### Notation
+
+For some weight $w_{i,j}^{(l)}$ being multiplied by some $h_{j}$, $l$ is the layer containing the $h$ values that the weights are being multiples by. $i$ is the node number of the node in layer $l+1$ that this weight is being sent to (i.e. the node at the end of the road that this weight lives on). $j$ refers to the node number in layer $l$ that this weight comes from, and also the node number that contains $h_{j}$ (i.e. the node at the beginning of the road that the weight lives on). Note that the $(l)$ does not mean the $l$th power, but is simply a superscript to denote the layer number.
+
+For some $b_{i}^{(l)}$, $i$ refers to the node number that the bias is connected to in layer $l+1$, while $l$ refers to the layer that the bias live on.
+
+For some $h_{j}^{(l)}$, $j$ denotes the node number in layer $l$ of the network. For exmaple, the outut of the fourth node in the input layer is represented as $h_{4}^{(1)}$, and the output of the thirteenth node in the hidden layer is:
+
+$$h_{13}^{(2)} = sigmoid((\sum_{j=0}^{n} w_{13,j}^{(1)}x_{13,j}^{(1)}) + b_{13})$$
+
+Lets put the above expression into words. To get the output of the thirteenth node in layer 2 (the hidden layer), we take the sum over all the nodes in the previous layer (layer 1) of the output values of those nodes multiplied by their corresponding weight, and then add the bias term for node 13. Then we apply the activation function and get our desired output.
+
+Having seemingly complicated notation like this will actually make it easy to represent the values in our network as matrices and vectors, and will also allow us to code our network much more efficiently.
+
+#### Vectorization
+
+Recall that $z$ was the weighted sum of each node in a particular layer, including the bias term, and was the input of out sigmoid function to that $h = sigmoid(z)$. Previously, calculating every $z$ for a particular layer was pretty involved, but now using vectorization we can simplify the calculations into an easy matrix multiplication.
+
+Lets define $W^{(l)}$ as the matrix containing all the weights for a particular layer $l$. And we'll let $h^{(l)}$ be the vector that gets multiplied by those weights, and $b^{(l)}$ as the bias vector. These are vectors because they contain the values for EVERY node in layer $l$, not just one. This will let us calculate the vector $z^{(l+1)}$, the output of the entire next layer.
+
+$$W^{(l)} = \begin{bmatrix}
+    w_{1,1}^{(l)} & w_{1,2}^{(l)} & \cdots & w_{1,n}^{(l)} \\
+    w_{2,1}^{(l)} & w_{2,2}^{(l)} & \cdots & w_{2,n}^{(l)} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    w_{k,1}^{(l)} & w_{k,2}^{(l)} & \cdots & w_{k,n}^{(l)} \\
+\end{bmatrix}\hspace{1cm}
+
+h^{(l)} = \begin{bmatrix}
+    h_{1}^{(l)} \\
+    h_{2}^{(l)} \\
+    \vdots \\
+    h_{n}^{(l)} \\
+\end{bmatrix}\hspace{1cm}
+
+b^{(l)} = \begin{bmatrix}
+    b_{1}^{(l)} \\
+    b_{2}^{(l)} \\
+    \vdots \\
+    b_{k}^{(l)} \\
+\end{bmatrix}$$
+
+We can easily calculate the output of the entire layer $l+1$ by computing the following:
+
+$$h^{(l+1)} = sigmoid(z^{(l+1)}) = sigmoid(W^{(l)}h^{(l)} + b^{(l)})$$
+
+Look carefully at whats going on in this matrix multiplication. If you remember from linear algebra, the first entry in $z^{(l+1)}$ will be $w_{1,1}^{(l)}h_{1}^{(l)} + w_{1,2}^{(l)}h_{2}^{(l)} + w_{1,n}^{(l)}h_{3}^{(l)} + b_{1}^{(l)}$, which is exactly what we had before from calculating the weighted sum for the first node in layer $l+1$. If we carry out the complete matrix multiplication, we get a $z$ vector with $k$ terms, where $k$ is the number of nodes in layer $l+1$. All we're doing is taking the dot product of one row of $W^{(l)}$ with $h^{(l)}$ and adding the bias to get our weighted sum, and then doing that $k$ times - once for each of the nodes in layer $l+1$ so that out resulting vecotr has one entry for each output of a node in layer $l+1$. This is how we get the output of the entire layer with one simple matrix calculation instead of a bunch of summations. Using NumPy, we'll be able to do these matrix multiplicatons extremely fast in Python.
+
+#### A Note
+
+So now we know how to take an input (in our case in the form of 784 greyscale pixel values), and propogated those values through the network using vectorization, multiplying the appropriate weights and adding the appropriate biases when necessary to eventually get our length 10 vector output.
+
+By now hopefully how can see how a neural network can model a really complicated function. And thats essentially all we're trying to do - approximate a function that maps inputs in the form of images to outputs in the form of a predicted digit. Our function takes 784 inputs, produces 10 outputs, and has 11935 parameters that we will tweak, but its still nonetheless a function just like $y=mx+b$ is a function with 1 input, 1 output, and 2 parameters.
+
+In the next section we will see how to actually tweak our parameters so that in the final section we can translate it all into python code and get a working neural network!
+
+## Training the Network
+
+In our dataset we have thousands of examples of handwritten digits and each one of them have a label of the actual digit its supposed to represent. The first of these training examples from our dataset might look like $(x_{1},y_{1})$, where $x_{1}$ is the 28 x 28 pixel image and $y_{1}$ is the number 7, which is the true value of what that image represents. We will use an algorithm that runs the 28 x 28 image through our network, checks the maxmimum of the length 10 vector output to see what prediction the network gave our image, and then compare it to the truth value. We will do this for all our training examples (nont just the first one) and see how accurate the network is, and then adjust the parameters to minimize a value called the "loss", which I'll introduce in a minute.
+
+### Gradient Descent
+
+So we have this idea of weights that live on connections between nodes and the value of the weight is annalogous to the strength of that connection. We also have biases, which make it harder or easier for a particular node to give higher outputs from its activation function. At first, we will randomly intiallize these weights and biases, since if we had an idea of which weights and biases to choose already, we really wouldn't need to traing the network would we? It goes without saying that using random parameters will make our network perform horribly at first when we run our images through it, however after some analysis and tweaking of the parameters, we will start to see which direction we need to tune them to make the network more accurate.
+
+#### The Cost Function
+
+How do we measure how good our network performed? When we first randomly initialize the parameters of the network, our output vector will look like a mess, and likely somewhat evenly distributed between in its values (i.e. there won't be a really clear maximum). We need a way to give these types of outputs a "bad score" and give a "good score" to the types of outputs that have a large value in the correct position of the output vector with a low value in incorrect positions. Thats where the cost function comes in.
+
+There are many different funtions you could use for the cost, but one of the simplest is the square error. Basically we will subtract our output vector from the truth vector and square those differences, then add up the entire vector we get the overall cost. For an image whose truth value is 3, that might look like this:
+
+$$sum\left(\left(\begin{bmatrix}
+    0.05 \\
+    0.05 \\
+    0.10 \\
+    0.05 \\
+    0.10 \\
+    0.05 \\
+    0.15 \\
+    0.15 \\
+    0.10 \\
+    0.20
+\end{bmatrix}
+-
+\begin{bmatrix}
+    0.00 \\
+    0.00 \\
+    0.00 \\
+    1.00 \\
+    0.00 \\
+    0.00 \\
+    0.00 \\
+    0.00 \\
+    0.00 \\
+    0.00
+\end{bmatrix}\right)^2\right)$$
+
+Note that the square operation will be applied element-wise to the vector. By using this cost function, we can get a scalar value of how bad out network performed in predicting this digit.
