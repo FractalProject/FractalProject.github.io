@@ -277,6 +277,4 @@ $$0.2 = \frac{\partial}{\partial w_{12, 1}^{(1)}}J(w, b)$$
 
 $$1.0 = \frac{\partial}{\partial w_{7, 5}^{(1)}}J(w, b)$$
 
-That means weight $w_{7, 5}^{(1)}$ is 5 times more sensative to changes than weight $w_{12, 1}^{(1)}$, since its gradient was 5 times as big. You can also think of it as the slope being 5 times as steep in the direction of the parameter space corresponding to weight $w_{7, 5}^{(1)}$ then the direction corresponding to weight $w_{12, 1}^{(1)}$.
-
-
+That means weight $w_{7, 5}^{(1)}$ is 5 times more sensative to changes than weight $w_{12, 1}^{(1)}$, since its gradient was 5 times as big. You can also think of it as the slope being 5 times as steep in the direction of the parameter space corresponding to weight $w_{7, 5}^{(1)}$ then the direction corresponding to weight $w_{12, 1}^{(1)}$
