@@ -255,3 +255,28 @@ Whats really happening in the above equations it that each weight and bias is ge
 $$w_{i,j, new}^{(l)} = w_{i,j, old}^{(l)} - \alpha\frac{\partial}{\partial w_{i,j, old}^{(l)}}J(w, b)$$
 
 $$b_{i, new}^{(l)} = b_{i, old}^{(l)} - \alpha\frac{\partial}{\partial b_{i, old}^{(l)}}J(w, b)$$
+
+This may look intimidating if you're not used to seeing multivariable calculus in an applied setting, but its actually a lot easier in practice than it may at first seem. In the next section, I'll explain exactly HOW we compute this gradient through a method called backpropagation. Then, I'll do a short recap of how everything fits together, before finally getting to the coding part of this tutorial.
+
+### Backpropagation
+
+In this section, I'll explain how we compute the gradient part of the gradient descent algorithm (the $-\nabla J(w, b)$ part) so we know which direction to change the weights. The method of doing this is called backpropagation, or backprop for short. When we compute this gradient vector $-\nabla J(w, b)$, it contains values that tell you the direction of the greatest decrease for each dimension in the parameter space (i.e. n-dimensional space created by the parameters of our network that the cost function exists in). For example, this might be the value of your gradient vector for some particular input parameters to the cost funtion:
+
+$$\begin{bmatrix}
+    0.27 \\
+    -0.14 \\
+    2.56 \\
+    \vdots \\
+    0.95 \\
+    -1.80
+\end{bmatrix}$$
+
+Just like we might have a vector $(1, 3)$ that specifies a direction in 2-dimensional space, our gradient vector tells us a direction in n-dimensional space, where n is the number of parameters in the network, and this direction is the direction of greatest decrease for the cost function. Remember, our partial derivitives are with respect to the weights and biases, but the derivatives themselves are performed ON the cost function. The values in this gradient vector also tell us how "sensitive" our parameters are to changes. For example, lets extract two arbitrary values from this gradient vector, say 0.2 and 1.0. And let say, for the sake fo argument, that the 0.2 is the partial derivtive of the cost function with repsect to the weight that connects node 1 of the input layer to node 12 of the second layer. And the 1.0 corresponds to the partial derivative of the cost function with respect to the weight that connects node 5 of the input layer to node 7 of the second layer. To put this in mathy-terms, this is what I'm talking about:
+
+$$0.2 = \frac{\partial}{\partial w_{12, 1}^{(1)}}J(w, b)$$
+
+$$1.0 = \frac{\partial}{\partial w_{7, 5}^{(1)}}J(w, b)$$
+
+That means weight $w_{7, 5}^{(1)}$ is 5 times more sensative to changes than weight $w_{12, 1}^{(1)}$, since its gradient was 5 times as big. You can also think of it as the slope being 5 times as steep in the direction of the parameter space corresponding to weight $w_{7, 5}^{(1)}$ then the direction corresponding to weight $w_{12, 1}^{(1)}$.
+
+
